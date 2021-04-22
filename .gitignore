@@ -7,7 +7,6 @@
 out
 gen
 target/
-
 *.class
 *.war
 *.ear
