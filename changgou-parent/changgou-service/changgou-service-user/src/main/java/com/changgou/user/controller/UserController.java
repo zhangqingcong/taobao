@@ -25,6 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     @RequestMapping("/login/{username}/{password}")
     public Result login(@PathVariable String username,@PathVariable String password){
        User user= userService.findByUserName(username);
