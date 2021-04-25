@@ -5,9 +5,9 @@ spring:
     name: goods
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://60.205.176.165:3306/changgou_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: 123456
+    url: jdbc:mysql://rm-2zemmqixm6p14180buo.mysql.rds.aliyuncs.com:3306/changgou_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: changgou
+    password: Ab123456
 eureka:
   client:
     service-url:

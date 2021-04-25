@@ -1,0 +1,112 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" #跨域处理 允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+        - id: changgou_goods_route
+#          uri: http://127.0.0.1:7002
+          uri: lb://goods  #lb=LoadBalancerClientFilter goods是eureka中注册的服务名称
+          predicates:
+#            - Host=127.0.0.1**
+             - Path=/goods/*
+          filters:
+#            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
+            - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
+            - name: RequestRateLimiter  #默认的工厂名不能乱改
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+        - id: changgou_file_route
+          uri: http://127.0.0.1:7003
+          predicates:
+              #            - Host=127.0.0.1**
+             - Path=/file/*
+          filters:
+              #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
+            - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
+            - name: RequestRateLimiter  #默认的工厂名不能乱改
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+        - id: changgou_canal_route
+          uri: http://127.0.0.1:7004
+          predicates:
+              #            - Host=127.0.0.1**
+             - Path=/canal/*
+          filters:
+              #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
+            - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
+            - name: RequestRateLimiter  #默认的工厂名不能乱改
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+        - id: changgou_content_route
+          uri: http://127.0.0.1:7005
+          predicates:
+              #            - Host=127.0.0.1**
+             - Path=/content/*
+          filters:
+              #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
+             - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
+             - name: RequestRateLimiter  #默认的工厂名不能乱改
+               args:
+                 key-resolver: "#{@ipKeyResolver}"
+                 redis-rate-limiter.replenishRate: 1
+                 redis-rate-limiter.burstCapacity: 1
+        - id: changgou_search_route
+          uri: http://127.0.0.1:7006
+          predicates:
+              #            - Host=127.0.0.1**
+             - Path=/search/*
+          filters:
+              #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
+             - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
+             - name: RequestRateLimiter  #默认的工厂名不能乱改
+               args:
+                 key-resolver: "#{@ipKeyResolver}"
+                 redis-rate-limiter.replenishRate: 1
+                 redis-rate-limiter.burstCapacity: 1
+        - id: changgou_user_route
+          uri: http://127.0.0.1:7007
+          predicates:
+              #            - Host=127.0.0.1**
+             - Path=/user/**
+          filters:
+              #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
+             - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
+             - name: RequestRateLimiter  #默认的工厂名不能乱改
+               args:
+                 key-resolver: "#{@ipKeyResolver}"
+                 redis-rate-limiter.replenishRate: 1
+                 redis-rate-limiter.burstCapacity: 1
+  application:
+    name: gateway-web
+  redis:
+    host: 60.205.176.165
+    port: 6379
+server:
+  port: 8001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
+management:
+  endpoint:
+    gateway:
+      enabled: true
+    web:
+      exposure:
+        include: true
