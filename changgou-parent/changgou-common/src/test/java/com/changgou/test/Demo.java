@@ -17,7 +17,7 @@ public class Demo {
         JwtBuilder builder = Jwts.builder();
         //1.头(不设置,默认) 2 载荷(数据) 3. 签名
         builder.setId("唯一的标识")
-                .setIssuer("颁发者")//生成令牌的一方
+                .setIssuer("颁发者XINGMING")//生成令牌的一方
                 .setSubject("主题")//就是描述 jwt的信息
                 .setExpiration(new Date(l))//设置过期时间
                 .signWith(SignatureAlgorithm.HS256,"itcast");//设置签名
