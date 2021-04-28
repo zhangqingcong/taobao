@@ -16,10 +16,10 @@ spring:
           uri: lb://goods  #lb=LoadBalancerClientFilter goods是eureka中注册的服务名称
           predicates:
 #            - Host=127.0.0.1**
-             - Path=/goods/*
+             - Path=/api/goods/**
           filters:
 #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
-            - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
+            - StripPrefix=2  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
             - name: RequestRateLimiter  #默认的工厂名不能乱改
               args:
                 key-resolver: "#{@ipKeyResolver}"
@@ -29,10 +29,10 @@ spring:
           uri: http://127.0.0.1:7003
           predicates:
               #            - Host=127.0.0.1**
-             - Path=/file/*
+             - Path=/api/file/**
           filters:
               #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
-            - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
+            - StripPrefix=2  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
             - name: RequestRateLimiter  #默认的工厂名不能乱改
               args:
                 key-resolver: "#{@ipKeyResolver}"
@@ -42,7 +42,7 @@ spring:
           uri: http://127.0.0.1:7004
           predicates:
               #            - Host=127.0.0.1**
-             - Path=/canal/*
+             - Path=/canal/**
           filters:
               #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
             - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
@@ -55,7 +55,7 @@ spring:
           uri: http://127.0.0.1:7005
           predicates:
               #            - Host=127.0.0.1**
-             - Path=/content/*
+             - Path=/content/**
           filters:
               #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
              - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
@@ -68,7 +68,7 @@ spring:
           uri: http://127.0.0.1:7006
           predicates:
               #            - Host=127.0.0.1**
-             - Path=/search/*
+             - Path=/search/**
           filters:
               #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
              - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个
@@ -81,7 +81,7 @@ spring:
           uri: http://127.0.0.1:7007
           predicates:
               #            - Host=127.0.0.1**
-             - Path=/user/**
+             - Path=/api/address/**,/api/areas/**,/api/cities/**,/api/provinces/**,/api/user/**,
           filters:
               #            - PrefixPath=/brand   #所有请求过来的都在路径上加上/brand
              - StripPrefix=1  #截取1一个 一个/代表一个 写1截取1个 写2截取2个

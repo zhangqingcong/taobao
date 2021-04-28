@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+    <title>Thymeleaf入门</title>
+</head>
+<body>
+<p th:text="${hello}"></p>
+
+<table>
+    <tr>
+        <td>下标</td>
+        <td>编号</td>
+        <td>姓名</td>
+        <td>住址</td>
+    </tr>
+    <tr th:each="user,userStat:${users}">
+        <td>
+            下标:<span th:text="${userStat.index}"></span>
+        </td>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.address}"></td>
+
+    </tr>
+    <div th:each="map,mapStat:${dataMap}">
+        <div th:text="${map}"></div>
+        key:<span th:text="${mapStat.current.key}"></span><br/>
+        value:<span th:text="${mapStat.current.value}"></span><br/>
+        ============================================================
+    </div>
+    <div th:each="nm,nmStat:${names}">
+        <span th:text="${nmStat.count}"></span><span th:text="${nm}"></span>
+    </div>
+
+    <div>
+        <span th:text="${#dates.format(now,'yyyy-MM-dd hh:ss:mm')}"></span>
+    </div>
+    <div>
+        <span th:if="${(age>=18)}">成年人</span>
+    </div>
+
+    <button onclick="adc()">aaaa</button>
+    <a th:class="|${class1}${class2}|">dddd</a>
+
+</table>
+</body>
+<script th:inline="javascript">
+    var hhh = [[${hello}]];
+
+    function abc() {
+        alert(hhh);
+    }
+</script>
+</html>
