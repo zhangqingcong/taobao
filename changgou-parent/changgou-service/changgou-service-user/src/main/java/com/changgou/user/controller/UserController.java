@@ -31,7 +31,7 @@ public class UserController {
 
 
     @RequestMapping("/login")
-    public Result login(String username, String password, HttpServletResponse response) {
+    public Result login(String username, String password, HttpServletRequest request,HttpServletResponse response) {
         //查询用户信息
         User user = userService.findByUserName(username);
 
@@ -43,8 +43,10 @@ public class UserController {
             info.put("username", username);
             //生成令牌
             String jwt = JwtUtil.creatJWT(UUID.randomUUID().toString(), JSON.toJSONString(info), null);
+            //设置到头文件中去
+            response.setHeader("Authorization",jwt);
+//            response.addHeader("Authorization",jwt);
             //把生成的令牌添加到cookie中去 会话保持技术
-            response.addHeader("Authorization", jwt);
             Cookie cookie = new Cookie("Authorization", jwt);
             cookie.setDomain("127.0.0.1");
             cookie.setPath("/");

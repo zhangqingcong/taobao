@@ -18,6 +18,7 @@ import reactor.core.publisher.Mono;
 public class AuthorizeFilter implements GlobalFilter, Ordered {
 
     private static final String AUTHORIZE_TOKEN = "Authorization";
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         //获取request response对象
@@ -34,36 +35,38 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
         }
         //1.优先获取头文件中的令牌信息
         String token = request.getHeaders().getFirst(AUTHORIZE_TOKEN);
-        System.out.println("从头文件中获取的toke"+token);
+        System.out.println("从request头文件中获取的toke：" + token);
+        token = response.getHeaders().getFirst(AUTHORIZE_TOKEN);
+        System.out.println("从responseheaders获取的token：" + token);
         //2.如果头文件中没有，则从请求参数中获取
-        if (StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             token = request.getQueryParams().getFirst(AUTHORIZE_TOKEN);
-            System.out.println("从请求参数中获取的token"+token);
+            System.out.println("从请求参数中获取的token：" + token);
         }
         //3.如果头文件和请求参数中都没有 则从cookie中获取令牌数据
         HttpCookie cookie = request.getCookies().getFirst(AUTHORIZE_TOKEN);
-        if (cookie!=null){
+        if (cookie != null) {
             token = cookie.getValue();
-            System.out.println("从cookie中获取的token"+token);
+            System.out.println("从cookie中获取的token" + token);
 
         }
 
         //如果头文件合请求参数 cookie中都没有token 则输出代码错误
-        if (StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             response.setStatusCode(HttpStatus.METHOD_NOT_ALLOWED);
             return response.setComplete();
         }
 
         //走到这一步说明从cookie中或者头文件中获取到了jwt令牌数据，这里就可以解析令牌数据
-       try {
-           Claims claims = JwtUtil.parseJWT(token);
+        try {
+            Claims claims = JwtUtil.parseJWT(token);
 //           request.mutate().header(AUTHORIZE_TOKEN,claims.toString());
-       }catch (Exception e){
-           e.printStackTrace();
-           //解析失败，响应401错误
-           response.setStatusCode(HttpStatus.UNAUTHORIZED);
-           return response.setComplete();
-       }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //解析失败，响应401错误
+            response.setStatusCode(HttpStatus.UNAUTHORIZED);
+            return response.setComplete();
+        }
         return chain.filter(exchange);
     }
 
