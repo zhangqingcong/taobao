@@ -93,7 +93,7 @@ spring:
   application:
     name: gateway-web
   redis:
-    host: 60.205.176.165
+    host: 192.168.23.129
     port: 6379
 server:
   port: 8001
