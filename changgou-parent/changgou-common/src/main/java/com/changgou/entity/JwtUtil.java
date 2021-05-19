@@ -1,6 +1,5 @@
 package com.changgou.entity;
 
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;

@@ -9,6 +9,7 @@ import com.changgou.user.pojo.User;
 import com.changgou.user.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletContext;
@@ -139,7 +140,7 @@ public class UserController {
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
+    @GetMapping({"/{id}","/load/{id}"})
     public Result<User> findById(@PathVariable String id) {
         //调用UserService实现根据主键查询User
         User user = userService.findById(id);
@@ -150,6 +151,7 @@ public class UserController {
      * 查询User全部数据
      * @return
      */
+    @PreAuthorize("hasAnyAuthority('admin','vip')")
     @GetMapping
     public Result<List<User>> findAll(HttpServletRequest request) {
 //        String authorization = request.getHeader("Authorization");

@@ -12,6 +12,7 @@
     <artifactId>changgou-service-goods</artifactId>
     <!--依赖-->
     <dependencies>
+
         <dependency>
             <groupId>com.changgou</groupId>
             <artifactId>changgou-service-goods-api</artifactId>
@@ -22,6 +23,12 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-elasticsearch</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
