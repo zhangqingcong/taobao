@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /****
@@ -204,7 +205,7 @@ public class SkuServiceImpl implements SkuService {
      * @return
      */
     @Override
-    public Sku findById(String id){
+    public Sku findById(BigInteger id){
         return  skuMapper.selectByPrimaryKey(id);
     }
 

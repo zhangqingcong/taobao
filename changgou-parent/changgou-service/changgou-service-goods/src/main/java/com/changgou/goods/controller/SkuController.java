@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /****
@@ -92,7 +93,7 @@ public class SkuController {
      * @return
      */
     @PutMapping(value="/{id}")
-    public Result update(@RequestBody  Sku sku,@PathVariable Long id){
+    public Result update(@RequestBody  Sku sku,@PathVariable BigInteger id){
         //设置主键值
         sku.setId(id);
         //调用SkuService实现修改Sku
@@ -118,7 +119,7 @@ public class SkuController {
      * @return
      */
     @GetMapping("/{id}")
-    public Result<Sku> findById(@PathVariable String id){
+    public Result<Sku> findById(@PathVariable(name = "id") BigInteger id){
         //调用SkuService实现根据主键查询Sku
         Sku sku = skuService.findById(id);
         return new Result<Sku>(true,StatusCode.OK,"查询成功",sku);

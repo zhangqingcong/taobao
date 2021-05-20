@@ -6,6 +6,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.changgou.entity.*;
+
+import java.math.BigInteger;
 import java.util.List;
 
 /****
@@ -80,7 +82,7 @@ public class SpuController {
      * @return
      */
     @PutMapping(value="/{id}")
-    public Result update(@RequestBody  Spu spu,@PathVariable Long id){
+    public Result update(@RequestBody  Spu spu,@PathVariable BigInteger id){
         //设置主键值
         spu.setId(id);
         //调用SpuService实现修改Spu

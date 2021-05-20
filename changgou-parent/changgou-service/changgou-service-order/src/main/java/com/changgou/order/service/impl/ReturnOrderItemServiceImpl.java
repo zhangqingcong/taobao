@@ -7,12 +7,13 @@ import com.changgou.order.service.ReturnOrderItemService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.math.BigInteger;
 import java.util.List;
-
+@Service
 public class ReturnOrderItemServiceImpl implements ReturnOrderItemService {
     @Autowired
     private ReturnOrderItemMapper returnOrderItemMapper;

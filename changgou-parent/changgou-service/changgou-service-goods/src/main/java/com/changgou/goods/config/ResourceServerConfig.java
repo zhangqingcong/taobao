@@ -68,7 +68,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         //所有请求必须认证通过
         httpSecurity.authorizeRequests()
                 //放行路径 参数里面配置放行地址
-                .antMatchers()
+                .antMatchers("/sku/**","/spu/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

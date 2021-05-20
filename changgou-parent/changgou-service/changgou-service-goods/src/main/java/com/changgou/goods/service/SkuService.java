@@ -3,6 +3,7 @@ package com.changgou.goods.service;
 import com.changgou.goods.pojo.Sku;
 import com.github.pagehelper.PageInfo;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /****
@@ -69,7 +70,7 @@ public interface SkuService {
      * @param id
      * @return
      */
-    Sku findById(String id);
+    Sku findById(BigInteger id);
 
     /***
      * 查询所有Sku

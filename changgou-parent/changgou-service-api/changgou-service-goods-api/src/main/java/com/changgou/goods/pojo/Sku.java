@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 
 /****
@@ -24,7 +25,7 @@ public class Sku implements Serializable{
 	@Id
     @Column(name = "id")
 	@JsonSerialize(using = ToStringSerializer.class)
-	private Long id;//商品id
+	private BigInteger id;//商品id
 	@ApiModelProperty(value = "商品条码",required = false)
     @Column(name = "sn")
 	private String sn;//商品条码
@@ -57,7 +58,7 @@ public class Sku implements Serializable{
 	private Date updateTime;//更新时间
 	@ApiModelProperty(value = "SPUID",required = false)
     @Column(name = "spu_id")
-	private Long spuId;//SPUID
+	private BigInteger spuId;//SPUID
 	@ApiModelProperty(value = "类目ID",required = false)
     @Column(name = "category_id")
 	private Integer categoryId;//类目ID
@@ -81,12 +82,12 @@ public class Sku implements Serializable{
 	private String status;//商品状态 1-正常，2-下架，3-删除
 
 	//get方法
-	public Long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
 	//set方法
-	public void setId(Long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 	//get方法
@@ -180,12 +181,12 @@ public class Sku implements Serializable{
 		this.updateTime = updateTime;
 	}
 	//get方法
-	public Long getSpuId() {
+	public BigInteger getSpuId() {
 		return spuId;
 	}
 
 	//set方法
-	public void setSpuId(Long spuId) {
+	public void setSpuId(BigInteger spuId) {
 		this.spuId = spuId;
 	}
 	//get方法

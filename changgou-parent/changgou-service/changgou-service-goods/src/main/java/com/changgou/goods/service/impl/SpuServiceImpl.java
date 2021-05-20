@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -246,7 +247,7 @@ public class SpuServiceImpl implements SpuService {
     public void saveGoods(Goods goods) {
         //增加spu
         Spu spu = goods.getSpu();
-        spu.setId(idWorker.nextId());
+        spu.setId(BigInteger.valueOf(idWorker.nextId()));
         spuMapper.insertSelective(spu);
 
         //增加sku
@@ -265,7 +266,7 @@ public class SpuServiceImpl implements SpuService {
                 name += " "+entry.getValue();
             }
             sku.setName(name);
-            sku.setId(idWorker.nextId());
+            sku.setId(BigInteger.valueOf(idWorker.nextId()));
             sku.setSpuId(sku.getId());
             sku.setCreateTime(date);
             sku.setUpdateTime(date);

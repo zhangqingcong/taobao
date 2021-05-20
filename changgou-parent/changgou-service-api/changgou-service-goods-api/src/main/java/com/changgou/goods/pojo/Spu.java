@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.math.BigInteger;
 
 /****
  * @Author:admin
@@ -23,7 +24,7 @@ public class Spu implements Serializable{
 	@JsonSerialize(using = ToStringSerializer.class)
 	@Id
 	@Column(name = "id")
-	private Long id;//主键
+	private BigInteger id;//主键
 	@ApiModelProperty(value = "货号",required = false)
     @Column(name = "sn")
 	private String sn;//货号
@@ -90,12 +91,12 @@ public class Spu implements Serializable{
 
 
 	//get方法
-	public Long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
 	//set方法
-	public void setId(Long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 	//get方法
