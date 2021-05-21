@@ -28,7 +28,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
         String path = request.getURI().getPath();
 
         //如果请求的服务是登录或者商品的部分微服务直接放行 这里模拟实现 完整演示需要设计一套权限系统
-        if (path.startsWith("/api/user/login") || path.startsWith("/api/brand/search")) {
+        if (path.startsWith("/") || path.startsWith("/api/user/login") || path.startsWith("/api/order-web/") || path.startsWith("/wcart/list")) {
             //放行
             Mono<Void> filter = chain.filter(exchange);
             return filter;
@@ -58,7 +58,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
             }
         }
         //如果头文件、请求参数、cookie中都没有token 则输出代码错误
-        if (StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             System.out.println(token);
             response.setStatusCode(HttpStatus.METHOD_NOT_ALLOWED);
             System.out.println("走到这一步了？");
@@ -84,13 +84,13 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
             //响应空数据
             return response.setComplete();
         } else {
-            if (!hasToken){
+            if (!hasToken) {
                 //判断令牌有没有bearer前缀 没有的话就添加
-                if(!token.startsWith("bearer ") && !token.startsWith("Bearer ")){
-                    token ="bearer "+token;
+                if (!token.startsWith("bearer ") && !token.startsWith("Bearer ")) {
+                    token = "bearer " + token;
                 }
                 //将令牌封装到头文件中
-                request.mutate().header(AUTHORIZE_TOKEN,token);
+                request.mutate().header(AUTHORIZE_TOKEN, token);
                 System.out.println("封装到请求头了");
             }
         }
