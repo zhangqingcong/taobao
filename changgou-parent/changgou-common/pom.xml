@@ -55,6 +55,7 @@
             <scope>compile</scope>
         </dependency>
 
+
     </dependencies>
     <description>公共子模块引入这些依赖后，其他微服务引入changgou-common后也自动引入这些依赖</description>
 </project>

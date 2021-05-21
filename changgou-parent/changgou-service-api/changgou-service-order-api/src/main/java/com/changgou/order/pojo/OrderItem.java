@@ -1,5 +1,8 @@
 package com.changgou.order.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,6 +22,7 @@ public class OrderItem implements Serializable {
     private Integer categoryId3;
     @Column(name = "spu_id")
     private BigInteger spuId;
+    @JsonSerialize(using = ToStringSerializer.class)//字符串序列化类型 用字符串代替 解决数字精度问题
     @Column(name = "sku_id")
     private BigInteger skuId;
     @Column(name = "order_id")
